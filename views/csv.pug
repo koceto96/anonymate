@@ -1,0 +1,16 @@
+extends layout
+
+block content
+  if output.length
+    table.table.table-light.table-striped
+      each out,index in output
+        tr
+          case index
+            when 0
+              each o in out
+                th= o
+            default
+              each o in out
+                td= o
+  else
+    p No File can be read
