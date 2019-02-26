@@ -1,0 +1,26 @@
+{
+  "name": "parser",
+  "version": "1.0.0",
+  "description": "csv to html",
+  "main": "app.js",
+  "scripts": {
+    "test": "nodemon ./app.js"
+  },
+  "author": "kieran",
+  "license": "ISC",
+  "dependencies": {
+    "@ladjs/bootstrap-social": "github:ladjs/bootstrap-social",
+    "bootstrap": "^4.3.1",
+    "csv": "^5.1.1",
+    "csv-parser": "^2.1.0",
+    "dotenv": "^6.2.0",
+    "express": "^4.16.4",
+    "fontawesome": "^5.6.3",
+    "fs": "0.0.1-security",
+    "jquery": "^3.3.1",
+    "node-sass-middleware": "^0.11.0",
+    "nodemon": "^1.18.10",
+    "popper.js": "^1.14.7",
+    "pug": "^2.0.3"
+  }
+}

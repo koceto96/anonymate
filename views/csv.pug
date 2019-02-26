@@ -12,5 +12,9 @@ block content
             default
               each o in out
                 td= o
+    form(method='POST')
+      button.btn.btn-success.float-right(type='submit')
+          i.fas.fa-mask.fa-sm
+          | Anonymise
   else
     p No File can be read

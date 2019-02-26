@@ -4,8 +4,13 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const path = require('path');
-const mongoose = require('mongoose');
 const sass = require('node-sass-middleware');
+const dotenv = require('dotenv');
+
+/**
+ * Load environment variables from .env file, where API keys and passwords are configured.
+ */
+dotenv.load({ path: '.env' });
 
 /**
  * Controllers (route handlers).
@@ -20,10 +25,11 @@ const app = express();
 /**
  * Express configuration.
  */
-app.set('host', '0.0.0.0');
-app.set('port', 8080);
+app.set('host', process.env.OPENSHIFT_NODEJS_IP || '0.0.0.0');
+app.set('port', process.env.PORT || process.env.OPENSHIFT_NODEJS_PORT || 8080);
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
+
 app.use(sass({
   src: path.join(__dirname, 'public'),
   dest: path.join(__dirname, 'public')
@@ -41,6 +47,7 @@ app.use('/webfonts', express.static(path.join(__dirname, 'node_modules/@fortawes
  * Primary app routes.
  */
 app.get('/',csvController.getCsv)
+app.post('/',csvController.postCsv)
 
 
 app.listen(app.get('port'), () => {
