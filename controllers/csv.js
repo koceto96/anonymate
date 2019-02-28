@@ -15,12 +15,11 @@ exports.getCsv = (req, res) => {
 };
 
 exports.postCsv = (req,res)=> {
-  console.log("test")
   var parser = csv.parse(function(err, output){
-    res.render('csv', {
+    res.render('csvpost', {
       title: 'Home',
       output
     });
   });
-  fs.createReadStream('./people_test_data_csv.csv').pipe(parser);
+  fs.createReadStream('./anon_data.csv').pipe(parser);
 }
