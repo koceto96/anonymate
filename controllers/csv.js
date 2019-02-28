@@ -21,5 +21,5 @@ exports.postCsv = (req,res)=> {
       output
     });
   });
-  fs.createReadStream('./anon_data.csv').pipe(parser);
+  fs.createReadStream('./anondata.csv').pipe(parser);
 }
