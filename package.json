@@ -4,7 +4,8 @@
   "description": "csv to html",
   "main": "app.js",
   "scripts": {
-    "test": "nodemon ./app.js"
+    "test": "nodemon ./app.js",
+    "start": "node app.js"
   },
   "author": "kieran",
   "license": "ISC",
