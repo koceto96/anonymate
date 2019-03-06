@@ -38,10 +38,10 @@ app.use(sass({
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.use('/', express.static(path.join(__dirname, 'public'), { maxAge: 31557600000 }));
-app.use('/js/lib', express.static(path.join(__dirname, 'node_modules/popper.js/dist/umd'), { maxAge: 31557600000 }));
-app.use('/js/lib', express.static(path.join(__dirname, 'node_modules/bootstrap/dist/js'), { maxAge: 31557600000 }));
-app.use('/js/lib', express.static(path.join(__dirname, 'node_modules/jquery/dist'), { maxAge: 31557600000 }));
+app.use('/', express.static(path.join(__dirname, 'public')));
+app.use('/js/lib', express.static(path.join(__dirname, 'node_modules/popper.js/dist/umd')));
+app.use('/js/lib', express.static(path.join(__dirname, 'node_modules/bootstrap/dist/js')));
+app.use('/js/lib', express.static(path.join(__dirname, 'node_modules/jquery/dist')));
 app.use('/webfonts', express.static(path.join(__dirname, 'node_modules/@fortawesome/fontawesome-free/webfonts'), { maxAge: 31557600000 }));
 
 /**
