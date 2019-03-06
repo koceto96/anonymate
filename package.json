@@ -8,6 +8,10 @@
   },
   "author": "kieran",
   "license": "ISC",
+  "repository" :{
+    "type" : "git",
+    "url" : "https://github.com/koceto96/anonymate.git"
+  },
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.7.2",
     "@ladjs/bootstrap-social": "github:ladjs/bootstrap-social",
