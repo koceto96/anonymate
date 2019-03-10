@@ -5,13 +5,14 @@ import anonymiseData as anon
 from sklearn import model_selection
 
 #Testing the normal and anonymised datasets against a regression problem 
-#that given user data, tries to estimate annual income of individuals. Aim of test is to see minor difference in accuracy
-#after the data has been anonymised
+#that given user data, tries to estimate annual income of individuals. Aim of test is to see minor difference in 
+#estimation accuracy after the data has been anonymised
 
 #formula is town^3+10*region, the lower the score the richer the people there are (on average)
 scoresByTown = {"W":1, "SW":3, "NW":6, "LS":12, "L":14, "B":14, "LE":15, "SR":18, "S":18, "HU":18, "PL":19, "ST":21, "SA":21, "DY":22, "DH":24}
 
 def processFile(file):
+    #these fields are not needed to obtain the prediction for this problem
     del file["name"]
     del file["tel"]
     i = 0
@@ -26,12 +27,13 @@ def processFile(file):
     for entry in file ["age"]:
         if '-' in str(entry):
             firstNum = int(entry.split('-')[0]) + 1
-            #convert to age category (that is how age is anonymised)
+            #convert to age category as machine learning needs to work with numbers (and here given a range x-y)
             file.at[i, 'age'] = int((firstNum - 4) / 10)
         else:
-            #use full age as non-anonymised version is passed if no '-'
+            #use full age as non-anonymised version
             file.at[i, 'age'] = int(entry)
         i += 1  
+    #print the first few lines of file to see if normal or anonymised version
     print(file.head()) 
     return file.values
 
