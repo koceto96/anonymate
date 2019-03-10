@@ -2,6 +2,7 @@ from sklearn.ensemble import GradientBoostingRegressor
 import pandas as pd
 import sklearn as s
 import anonymiseData as anon
+from sklearn import model_selection
 
 #formula is town^3+10*region
 scoresByTown = {"W":1, "SW":3, "NW":6, "LS":12, "L":14, "B":14, "LE":15, "SR":18, "S":18, "HU":18, "PL":19, "ST":21, "SA":21, "DY":22, "DH":24}
