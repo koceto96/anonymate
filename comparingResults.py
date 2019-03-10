@@ -4,7 +4,11 @@ import sklearn as s
 import anonymiseData as anon
 from sklearn import model_selection
 
-#formula is town^3+10*region
+#Testing the normal and anonymised datasets against a regression problem 
+#that given user data, tries to estimate annual income of individuals. Aim of test is to see minor difference in accuracy
+#after the data has been anonymised
+
+#formula is town^3+10*region, the lower the score the richer the people there are (on average)
 scoresByTown = {"W":1, "SW":3, "NW":6, "LS":12, "L":14, "B":14, "LE":15, "SR":18, "S":18, "HU":18, "PL":19, "ST":21, "SA":21, "DY":22, "DH":24}
 
 def processFile(file):
@@ -12,7 +16,7 @@ def processFile(file):
     del file["tel"]
     i = 0
     for entry in file ["postcode"]:
-    #file.at[i,'postcode'] = entry.split()[0]
+        #get only the first half of postcode as it is important for ML
         if '*' in str(entry):
             file.at[i, 'postcode'] = postcodeToNum (entry.split('*')[0])
         else:
@@ -22,6 +26,7 @@ def processFile(file):
     for entry in file ["age"]:
         if '-' in str(entry):
             firstNum = int(entry.split('-')[0]) + 1
+            #convert to age category (that is how age is anonymised)
             file.at[i, 'age'] = int((firstNum - 4) / 10)
         else:
             #use full age as non-anonymised version is passed if no '-'
@@ -69,15 +74,16 @@ def gradientTreeRegression(array):
     print ("Feature Importances", gbrt.feature_importances_)
     print ("R-squared for Train", gbrt.score(X_train, Y_train))
     print ("R-squared for test", gbrt.score(X_validation, Y_validation))
-            
+
+#1.0 is the perfect score that can be obtained via the training and testing processes
 file = pd.read_csv('data.csv', encoding = "ISO-8859-1")
 array = processFile(file)
-print("Machine learning with normal data below")
+print("Machine learning results with normal data below")
 gradientTreeRegression(array)
 
 anonFile = anon.anonimyse('data.csv')
 print(anonFile.head())
 print("Converting data to a form suitable for machine learning")
 anonArray = processFile(anonFile)
-print("Machine learning with anonymised data below")
+print("Machine learning results with anonymised data below")
 gradientTreeRegression(anonArray)
