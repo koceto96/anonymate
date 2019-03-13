@@ -1,8 +1,8 @@
-from sklearn.ensemble import GradientBoostingRegressor
 import pandas as pd
 import sklearn as s
 import anonymiseData as anon
 from sklearn import model_selection
+from sklearn.ensemble import GradientBoostingRegressor
 
 #Testing the normal and anonymised datasets against a regression problem 
 #that given user data, tries to estimate annual income of individuals. Aim of test is to see minor difference in 
@@ -74,7 +74,7 @@ def gradientTreeRegression(array):
     res = gbrt.fit(X_train, Y_train) 
     y_pred=gbrt.predict(X_validation)
     print ("Feature Importances", gbrt.feature_importances_)
-    print ("R-squared for Train", gbrt.score(X_train, Y_train))
+    print ("R-squared for train", gbrt.score(X_train, Y_train))
     print ("R-squared for test", gbrt.score(X_validation, Y_validation))
 
 #1.0 is the perfect score that can be obtained via the training and testing processes
@@ -83,6 +83,7 @@ array = processFile(file)
 print("Machine learning results with normal data below")
 gradientTreeRegression(array)
 
+print("Anonymising data")
 anonFile = anon.anonimyse('data.csv')
 print(anonFile.head())
 print("Converting data to a form suitable for machine learning")
