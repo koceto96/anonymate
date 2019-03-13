@@ -5,6 +5,7 @@ const express = require('express');
 const compression = require('compression');
 const bodyParser = require('body-parser');
 const path = require('path');
+const expressValidator = require('express-validator');
 const sass = require('node-sass-middleware');
 const dotenv = require('dotenv');
 
@@ -17,6 +18,8 @@ dotenv.load({ path: '.env' });
  * Controllers (route handlers).
  */
 const csvController = require('./controllers/csv');
+const userController = require('./controllers/user');
+const router = require('./controllers/router');
 
 /**
  * Create Express server.
@@ -37,6 +40,7 @@ app.use(sass({
 }));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(expressValidator());
 
 app.use('/', express.static(path.join(__dirname, 'public')));
 app.use('/js/lib', express.static(path.join(__dirname, 'node_modules/popper.js/dist/umd')));
@@ -47,9 +51,12 @@ app.use('/webfonts', express.static(path.join(__dirname, 'node_modules/@fortawes
 /**
  * Primary app routes.
  */
-app.get('/',csvController.getCsv)
-app.post('/',csvController.postCsv)
-
+app.get('/',router.getHome);
+app.get('/signup', userController.getSignup);
+app.post('/signup', userController.postSignup);
+app.get('/pricing', router.getPricing);
+app.get('/example', router.getExample);
+app.post('/example', router.postExample);
 
 app.listen(app.get('port'), () => {
   console.log('App is running at http://localhost:%d in %s mode', app.get('port'), app.get('env'));
