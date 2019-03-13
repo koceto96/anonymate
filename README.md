@@ -7,6 +7,9 @@ A facility that takes a large dataset of people's personal information and anony
 
 ## Running the program
 In order to test the claim that data analysis isn't impacted by the data anonymization, machine learning will be performed on a file (data.csv), containing randomly generated (via the generate_csv_data.py script) user data and results will be compared.
+
 Ensure data.csv, comparingResults.py and anonymiseData.py are in the same folder. All the needed libraries for the program should also be installed in this folder or visible from this folder.
+
 Then execute the following line:      python comparingResults.py
+
 Machine learning will then be performed with original user data from data.csv and with the anonymized version of the data in that file. The machine learning results in each case will be displayed, proving that the quality of results isn't impacted by the data anonymization. The first few lines of data for each version are also printed out, allowing one to see the way in which data has been anonymized.
